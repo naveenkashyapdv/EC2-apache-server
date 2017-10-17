@@ -1,3 +1,1 @@
-# learn_chef_apache2
-
-This basic cookbook configures Apache on Ubuntu.
+This is Apache server cookbook spining up in EC2 instance. Provider: EC2
