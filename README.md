@@ -1,1 +1,1 @@
-This is Apache server cookbook spining up in EC2 instance. Provider: EC2
+This is chef cookbook spining up Apache server in EC2 instance. Provider: EC2
