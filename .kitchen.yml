@@ -1,0 +1,50 @@
+---
+driver:
+  name: ec2
+  aws_ssh_key_id: ForChef
+  region: us-east-1
+  availability_zone: b
+  subnet_id: subnet-963a06bb
+  instance_type: m4.10xlarge
+  image_id: ami-c998b6b2
+  block_device_mappings:
+        - device_name: /dev/sda1
+          ebs:
+            volume_type: gp2
+            volume_size: 30
+            delete_on_termination: true
+  security_group_ids: ["sg-c18c4bbd"]
+  retryable_tries: 120
+  associate_public_ip: true
+  interface: dns
+
+tags:
+    Owner: venkatnaveen
+    Email: v@gmail.com
+    Description: Cookbook for Testing Chef
+    Name: Test
+    Costcentre: Identity
+    Project: Identity
+    Environment: dev
+
+provisioner:
+  name: chef_zero
+
+verifier:
+  name: inspec
+
+transport:
+  ssh_key: "PATH TO THE PEM FILE DOWNLOADED FORM AWS ACCOUNT"
+  username: ec2-user
+
+platforms:
+  - name: rhel-7.4
+
+suites:
+  - name: default
+    run_list:
+      - recipe[learn_chef_apache2::default]
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:
